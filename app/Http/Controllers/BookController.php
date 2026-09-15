@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function index() {
-        return view('books.index');
-    }
+    $stock = 7;
 
-    public function show($id) {
-        return 'ID Buku: ' . $id;
-    }
+    return view('books.index', compact('stock'));
+}
 }

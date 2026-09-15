@@ -35,9 +35,3 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 //      // return 'Dashboard';
 //      return view('dashboard.index');    
 // });
-
-Route::get('/books', [BookController::class, 'show']);
-
-Route::get('/books/{id}', function ($id) {
-    return 'Detail Buku' . '<br><br>' . 'ID Buku: ' . $id;
-});

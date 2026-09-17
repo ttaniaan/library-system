@@ -7,8 +7,17 @@ use Illuminate\Http\Request;
 class BookController extends Controller
 {
     public function index() {
-    $stock = 7;
+    $books = [
+        'Pemrograman PHP',
+        'Laravel untuk Pemula',
+        'Basis Data',
+        'Algoritma dan Pemrograman',
+        'Pemrograman Berorientasi Objek',
+        'Struktur Data',
+        'Jaringan Komputer',
+        'Rekayasa Perangkat Lunak'
+    ];
 
-    return view('books.index', compact('stock'));
-}
+    return view('books.index', compact('books'));
+    } 
 }

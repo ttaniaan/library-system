@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Data Buku')
+@section('title', 'Daftar Buku')
 
 @section('content')
     <h2>Daftar Buku</h2>
     <ul>
         @foreach($books as $book)
-            <li>{{ $book }}</li>
+            <li>
+                <strong>{{ $book['judul'] }}</strong> - {{ $book['penulis'] }} ({{ $book['tahunTerbit'] }})
+            </li>
         @endforeach
     </ul>
 @endsection

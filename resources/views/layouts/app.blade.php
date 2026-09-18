@@ -14,8 +14,9 @@
         <h1>Library System</h1>
 
         <nav>
+            <a href="/dashboard">Dashboard</a> |
             <a href="/books">Books</a> |
-            <a href="/categories">categories</a> |
+            <a href="/categories">Category</a> |
             <a href="/members">Members</a>
         </nav>
 
@@ -28,7 +29,7 @@
 
     <footer>
         <hr>
-        <p>Library System</p>
+        <p><center>LIBRARY SYSTEM <br> &copy; 2026</center></p>
     </footer>
 
 </body>

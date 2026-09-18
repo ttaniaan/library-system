@@ -12,26 +12,10 @@ Route::get('/', function () {
 
 Route::get('/books', [BookController::class, 'index']);
 
-// Router::get('/books, function () {
-//      // return 'Daftar Buku';
-//      return view('books.index');    
-// });
-
 Route::get('/categories', [CategoriesController::class, 'index']);
 
-// Router::get('/categories, function () {
-//      // return 'Daftar Categories';
-//      return view('categories.index');    
-// });
-
 Route::get('/members', [MembersController::class, 'index']);
-// Router::get('/members, function () {
-//      // return 'Daftar Members';
-//      return view('members.index');    
-// });
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
-// Router::get('/dashboard, function () {
-//      // return 'Dashboard';
-//      return view('dashboard.index');    
-// });
+
+Route::get('/books/{id}', [BookController::class, 'show']);

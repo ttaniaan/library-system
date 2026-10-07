@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Buku')
+@section('title', $title ?? 'Detail Buku')
 
 @section('content')
     <h2>Detail Buku</h2>
-    <p>ID: {{ $id }}</p>
+
+    <p><strong>ID Buku:</strong> {{ $book->id }}</p>
+    <p><strong>Judul Buku:</strong> {{ $book->title }}</p>
+    <p><strong>Penulis:</strong> {{ $book->author }}</p>
+    <p><strong>Tahun Terbit:</strong> {{ $book->year }}</p>
+    <p><strong>Stok:</strong> {{ $book->stock }}</p>
+
 @endsection

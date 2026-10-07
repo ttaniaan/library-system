@@ -5,26 +5,25 @@
 @section('content')
     <h2>Daftar Buku (Database)</h2>
 
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Judul</th>
-                <th>Penulis</th>
-                <th>Tahun Terbit</th>
-                <th>Stok</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($books as $book)
-                <tr>
-                    <td>{{ $book->id }}</td>
-                    <td>{{ $book->title }}</td>
-                    <td>{{ $book->author }}</td>
-                    <td>{{ $book->year }}</td>
-                    <td>{{ $book->stock }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <a href="{{ route('books.create') }}">Tambah Buku Baru</a>
+
+    @foreach($books as $book)
+        <p>
+            {{ $book->title }} - {{ $book->author }} ({{ $book->year }}) [Stok: {{ $book->stock }}]
+            <a href="{{ route('books.edit', $book) }}">Edit</a>
+
+            <!-- Form Delete -->
+            <form 
+                action="{{ route('books.destroy', $book) }}" 
+                method="POST"
+            >
+                @csrf
+                @method('DELETE')
+
+                <button type="submit">
+                    Hapus
+                </button>
+            </form>
+        </p>
+    @endforeach
 @endsection

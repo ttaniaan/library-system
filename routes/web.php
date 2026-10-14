@@ -18,6 +18,12 @@ Route::get('/members', [MembersController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
+Route::get('/books/create', [BookController::class, 'create']);
+
+Route::get('/books/edit/{id}', [BookController::class, 'edit']);
+
+Route::get('/books/{book}', [BookController::class, 'show']);
+
 Route::get('/books/{id}', [BookController::class, 'show']);
 
 Route::resource('books', BookController::class);

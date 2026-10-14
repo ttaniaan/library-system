@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 
-class BookController extends Controller
-{
+class BookController extends Controller {
+
     /**
      * Display a listing of the resource.
      */
@@ -28,17 +28,21 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        Book::create([
-            'title' => $request->title,
-            'author' => $request->author,
-            'year' => $request->year,
-            'stock' => $request->stock,
+        $validated = $request->validate ([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'year' => 'required|integer|min:1900',
+            'stock' => 'required|integer|min:0',
         ]);
 
-        return redirect()->route('books.index');
+        Book::create($validated);
+
+        return redirect() 
+            ->route('books.index')
+            ->with('success', 'Data buku berhasil ditambahkan.');
+        
     }
-
-
+    
     /**
      * Display the specified resource.
      */
@@ -55,19 +59,23 @@ class BookController extends Controller
         return view('books.edit', compact('book'));
     }
 
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book) {
-        $book->update([
-            'title' => $request->title,
-            'author' => $request->author,
-            'year' => $request->year,
-            'stock' => $request->stock,
+    public function update(Request $request) {
+        $validated = $request->validate([
+            'title'  => 'required|string|min:3|max:255',
+            'author' => 'required|string|min:3|max:255',
+            'year'   => 'required|integer|min:1900|max:2026',
+            'stock'  => 'required|integer|min:0',
         ]);
 
-        return redirect()->route('books.index');
+        $book->update($validated);
+
+        return redirect() 
+            ->route('books.index')
+            ->with('success', 'Data buku berhasil diperbarui.');
+        
     }
 
 
@@ -79,5 +87,4 @@ class BookController extends Controller
 
         return redirect()->route('books.index');
     }
-
 }

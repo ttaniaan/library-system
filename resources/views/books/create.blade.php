@@ -1,18 +1,48 @@
 @extends('layouts.app')
 
+@section('title', 'Tambah Buku')
+
 @section('content')
     <h2>Tambah Buku Baru</h2>
 
     <form action="{{ route('books.store') }}" method="POST">
         @csrf
 
-        <input type="text" name="title">
-        <input type="text" name="author">
-        <input type="number" name="year">
-        <input type="number" name="stock">
+        <p>
+            <label>Judul Buku:</label><br>
+            <input type="text" name="title" value="{{ old('title') }}">
+            @error('title')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
 
-        <button type="submit">
-            Simpan
-        </button>
+        <p>
+            <label>Penulis:</label><br>
+            <input type="text" name="author" value="{{ old('author') }}">
+            @error('author')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <label>Tahun Terbit:</label><br>
+            <input type="number" name="year" value="{{ old('year') }}">
+            @error('year')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <label>Stok Buku:</label><br>
+            <input type="number" name="stock" value="{{ old('stock') }}">
+            @error('stock')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <button type="submit">Simpan Data</button>
+            <a href="{{ route('books.index') }}">Batal</a>
+        </p>
     </form>
 @endsection

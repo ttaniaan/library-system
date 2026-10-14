@@ -1,22 +1,49 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Buku')
+@section('title', 'Edit Buku')
 
 @section('content')
-    <h2>Daftar Buku (Database)</h2>
+    <h2>Edit Data Buku</h2>
 
     <form action="{{ route('books.update', $book) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <input type="text" name="title" value="{{ $book->title }}">
-        <input type="text" name="author" value="{{ $book->author }}">
-        <input type="number" name="year" value="{{ $book->year }}">
-        <input type="number" name="stock" value="{{ $book->stock }}">
+        <p>
+            <label>Judul Buku:</label><br>
+            <input type="text" name="title" value="{{ old('title', $book->title) }}">
+            @error('title')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
 
-        <button type="submit">
-            Update
-        </button>
+        <p>
+            <label>Penulis:</label><br>
+            <input type="text" name="author" value="{{ old('author', $book->author) }}">
+            @error('author')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <label>Tahun Terbit:</label><br>
+            <input type="number" name="year" value="{{ old('year', $book->year) }}">
+            @error('year')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <label>Stok Buku:</label><br>
+            <input type="number" name="stock" value="{{ old('stock', $book->stock) }}">
+            @error('stock')
+                <br><span>{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            <button type="submit">Update Data</button>
+            <a href="{{ route('books.index') }}">Batal</a>
+        </p>
     </form>
-
 @endsection

@@ -3,14 +3,19 @@
 @section('title', 'Daftar Buku')
 
 @section('content')
+    @if(session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+    
     <h2>Daftar Buku (Database)</h2>
 
     <a href="{{ route('books.create') }}">Tambah Buku Baru</a>
 
     @foreach($books as $book)
         <p>
-            {{ $book->title }} - {{ $book->author }} ({{ $book->year }}) [Stok: {{ $book->stock }}]
-            <a href="{{ route('books.edit', $book) }}">Edit</a>
+            <h3>{{ $book->title }} - {{ $book->author }} ({{ $book->year }}) [Stok: {{ $book->stock }}]</h3>
+            <a href="{{ route('books.edit', $book) }}">Edit Buku</a><br>
+            <a href="{{ route('books.show', $book) }}">Detail Buku</a>
 
             <!-- Form Delete -->
             <form 

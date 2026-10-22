@@ -12,11 +12,11 @@ Route::get('/', function () {
 
 // Route::get('/books', [BookController::class, 'index']);
 
-Route::get('/categories', [CategoriesController::class, 'index']);
-
 Route::get('/members', [MembersController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/categories', [CategoriesController::class, 'index']);
 
 Route::get('/books/create', [BookController::class, 'create']);
 

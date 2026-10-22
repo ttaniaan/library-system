@@ -41,6 +41,19 @@
             @enderror
         </p>
 
+        <select name="category_id" id='category_id'>
+            <option value="">Pilih Kategori</option>
+
+            @foreach ($categories as $category)
+                <option
+                    value="{{ $category->id }}"
+                    @selected(old('category_id') == $category->id)
+                >
+                    {{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+
         <p>
             <button type="submit">Update Data</button>
             <a href="{{ route('books.index') }}">Batal</a>

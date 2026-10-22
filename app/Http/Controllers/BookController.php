@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Category;
 
 class BookController extends Controller {
 
@@ -11,16 +12,18 @@ class BookController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $books = Book::all();
+        $books = Book::with('category')->get();
 
         return view('books.index', compact('books'));
-    }  
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('books.create');
+        ($categories = Category::orderBy('name')->get());
+        
+        return view('books.create', compact('categories'));
     }
 
 
@@ -33,6 +36,7 @@ class BookController extends Controller {
             'author' => 'required|string|max:255',
             'year' => 'required|integer|min:1900',
             'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         Book::create($validated);
@@ -56,18 +60,21 @@ class BookController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Book $book) {
-        return view('books.edit', compact('book'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('books.edit', compact('book', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request) {
+    public function update(Request $request, Book $book) {
         $validated = $request->validate([
             'title'  => 'required|string|min:3|max:255',
             'author' => 'required|string|min:3|max:255',
             'year'   => 'required|integer|min:1900|max:2026',
             'stock'  => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $book->update($validated);

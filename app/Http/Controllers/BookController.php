@@ -69,7 +69,7 @@ class BookController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, Book $book) {
-        $validated = $request->validate([
+        $validated = $request->validate([ 
             'title'  => 'required|string|min:3|max:255',
             'author' => 'required|string|min:3|max:255',
             'year'   => 'required|integer|min:1900|max:2026',

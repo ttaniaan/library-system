@@ -5,25 +5,26 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-// Route::get('/books', [BookController::class, 'index']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+});
 
-Route::get('/members', [MembersController::class, 'index']);
+Route::middleware('auth')->group(function () {
+    
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/categories', [CategoriesController::class, 'index']);
+    Route::get('/members', [MembersController::class, 'index'])->name('members.index');
+    
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
 
-Route::get('/books/create', [BookController::class, 'create']);
-
-Route::get('/books/edit/{id}', [BookController::class, 'edit']);
-
-Route::get('/books/{book}', [BookController::class, 'show']);
-
-Route::get('/books/{id}', [BookController::class, 'show']);
-
-Route::resource('books', BookController::class);
+    Route::resource('books', BookController::class);
+});

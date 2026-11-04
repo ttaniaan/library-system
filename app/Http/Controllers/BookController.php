@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Book;
 use App\Models\Category;
 
@@ -89,9 +90,13 @@ class BookController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Book $book) {
+    public function destroy(Book $book)
+    {
+        Gate::authorize('delete', $book);
         $book->delete();
 
-        return redirect()->route('books.index');
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 }

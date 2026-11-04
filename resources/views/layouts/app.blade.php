@@ -17,7 +17,12 @@
             <a href="/dashboard">Dashboard</a> |
             <a href="/books">Books</a> |
             <a href="/categories">Category</a> |
-            <a href="/members">Members</a>
+            <a href="/members">Members</a> |
+            @can('manage-users')
+                <a href="{{ route('users.index') }}" class="nav-link">
+                    Kelola Pengguna
+                </a>
+            @endcan
         </nav>
 
         <hr>

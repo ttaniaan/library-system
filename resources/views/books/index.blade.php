@@ -23,17 +23,18 @@
             <a href="{{ route('books.show', $book) }}">Detail Buku</a>
 
             <!-- Form Delete -->
-            <form 
-                action="{{ route('books.destroy', $book) }}" 
-                method="POST"
-            >
-                @csrf
-                @method('DELETE')
+            @can('delete', $book)
+                <form action="{{ route('books.destroy', $book->id) }}"
+                    method="POST"
+                    onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
 
-                <button type="submit">
-                    Hapus
-                </button>
-            </form>
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit">Delete</button>
+                </form>
+            @endcan
+
         </p>
     @endforeach
 @endsection

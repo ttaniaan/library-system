@@ -18,20 +18,22 @@
             <a href="/books">Books</a> |
             <a href="/categories">Category</a> |
             <a href="/members">Members</a> |
+            <a href="/borrowings">Peminjaman</a> |
             @can('manage-users')
                 <a href="{{ route('users.index') }}" class="nav-link">
                     Kelola Pengguna
                 </a>
             @endcan
+
+        <br><br>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+
+            <button type="submit">Logout</button>
+        </form>
         </nav>
 
         <hr>
-
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-
-        <button type="submit">Logout</button>
-    </form>
 
     </header>
 
